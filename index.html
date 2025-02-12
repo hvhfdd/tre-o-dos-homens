@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -18,7 +17,7 @@
 
         /* Cabeçalho */
         header {
-            background: #222; /* Fundo preto claro para o header */
+            background: #222; /* Fundo preto claro para o header/banner */
             color: #fff;
             padding: 20px 0;
             text-align: center;
@@ -42,6 +41,7 @@
 
         /* Banner */
         .banner {
+            position: relative;
             width: 100%;
             height: 600px;
             background-image: url('https://hvhfdd.github.io/tre-o-dos-homens/img/foto8.jpg');
@@ -55,13 +55,25 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
 
-        /* Animações */
-        #texto-bemvindo, #texto-passagem {
+        /* Animação de boas-vindas */
+        #texto-bemvindo {
             opacity: 0;
             animation: fadeIn 2s ease-out forwards;
         }
 
+        /* Animação da passagem bíblica */
+        #texto-passagem {
+            opacity: 0;
+            animation: fadeInPassagem 3s ease-out 2s forwards; /* Adicionado delay de 2s */
+        }
+
+        /* Animações */
         @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes fadeInPassagem {
             0% { opacity: 0; }
             100% { opacity: 1; }
         }
@@ -95,7 +107,7 @@
             height: 200px;
             object-fit: cover;
             border-radius: 22px;
-            transition: transform 0.2s ease;
+            transition: transform 0.10s ease;
             cursor: pointer;
         }
 
@@ -122,6 +134,18 @@
             max-height: 80%;
         }
 
+        /* Estilo do botão de fechar o modal */
+        #fechar-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
         /* Rodapé */
         footer {
             text-align: center;
@@ -138,7 +162,7 @@
 
     <!-- Cabeçalho -->
     <header>
-        <h1>Terço dos Homens Paróquia Santo Antônio</h1>
+        <h1>Terço dos Homens Paróquia Santo Antonio</h1>
         <nav>
             <ul>
                 <li><a href="#passagens">Passagens Bíblicas</a></li>
@@ -148,7 +172,7 @@
     </header>
 
     <!-- Banner -->
-    <div class="banner">
+    <div class="banner" id="bemvindo">
         <span id="texto-bemvindo">Bem-vindo ao Terço dos Homens Gusmão!</span>
     </div>
 
@@ -157,14 +181,16 @@
         <!-- Passagens Bíblicas -->
         <section id="passagens">
             <h2>Passagens Bíblicas</h2>
-            <p id="texto-passagem"></p>
+            <p id="texto-passagem">Onde não há visão, o povo perece. - Provérbios 29:18</p>
         </section>
-        <h3><p>Nossos encontros são todas as segundas-feiras às 19h. Esperamos você lá!</p></h3>
+        <h3><p>Nossos encontros são todas as segundas-feiras às 19h, esperamos você lá! :)</p></h3>
 
         <!-- Galeria -->
         <section id="galeria">
             <h2>Galeria</h2>
-            <div class="galeria"></div>
+            <div class="galeria">
+                <!-- As imagens serão inseridas dinamicamente pelo JavaScript -->
+            </div>
         </section>
     </main>
 
@@ -176,7 +202,7 @@
 
     <!-- Rodapé -->
     <footer>
-        <p>&copy; 2025 Terço dos Homens Eunápolis</p>
+        <p>&copy; 2025 Terço dos Homens Eunápolis </p>
     </footer>
 
     <script>
@@ -194,18 +220,67 @@
             "O Senhor é a minha luz e a minha salvação; a quem temerei? - Salmo 27:1"
         ];
 
-        // Criar array de 64 imagens automaticamente
-        const imagens = Array.from({ length: 64 }, (_, i) => 
-            `https://hvhfdd.github.io/tre-o-dos-homens/img/foto${i + 1}.jpg`
-        );
+        // Lista de 66 imagens
+        const imagens = [
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto1.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto2.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto3.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto4.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto5.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto6.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto7.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto8.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto9.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto10.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto11.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto12.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto13.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto14.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto15.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto16.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto17.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto18.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto19.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto20.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto21.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto22.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto23.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto24.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto25.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto26.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto27.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto28.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto29.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto30.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto31.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto32.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto33.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto34.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto35.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto36.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto37.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto38.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto39.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto40.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto41.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto42.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto43.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto44.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto45.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto46.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto47.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto48.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto49.jpg",
+            "https://hvhfdd.github.io/tre-o-dos-homens/img/foto50.jpg"
+        ];
 
-        // Exibir passagem bíblica aleatória a cada 5 segundos
+        // Função para exibir passagens bíblicas de forma aleatória
         function exibirPassagemAleatoria() {
             const passagemAleatoria = passagens[Math.floor(Math.random() * passagens.length)];
             document.getElementById("texto-passagem").innerText = passagemAleatoria;
         }
 
-        // Preencher a galeria de imagens
+        // Função para preencher a galeria de imagens
         function carregarGaleria() {
             const galeria = document.querySelector('.galeria');
             imagens.forEach(imagem => {
@@ -217,21 +292,23 @@
             });
         }
 
-        // Mostrar imagem ampliada no modal
+        // Função para mostrar a imagem ampliada
         function mostrarImagemAmpliada(src) {
-            document.getElementById('img-ampliada').src = src;
-            document.getElementById('modal').style.display = 'flex';
+            const modal = document.getElementById('modal');
+            const imgAmpliada = document.getElementById('img-ampliada');
+            imgAmpliada.src = src;
+            modal.style.display = 'flex';
         }
 
-        // Fechar modal
+        // Função para fechar o modal
         document.getElementById('fechar-modal').onclick = function () {
             document.getElementById('modal').style.display = 'none';
         };
 
-        // Iniciar funções ao carregar a página
+        // Carregar a galeria de imagens ao carregar a página
         window.onload = function () {
             carregarGaleria();
-            setInterval(exibirPassagemAleatoria, 5000);
+            setInterval(exibirPassagemAleatoria, 5000); // Exibir uma nova passagem a cada 5 segundos
             document.getElementById("texto-bemvindo").style.opacity = 1;
         };
     </script>
